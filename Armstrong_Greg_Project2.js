@@ -49,5 +49,20 @@ while (ammo > 0, zombies > 0) {
 	console.log ("There are " + zombies + " zombies left and only " + ammo + " rounds left!")
 	ammo--, zombies--;
 };
+
+console.log ("The remaining zombie corners " + survivors[1] + " and she screams for help!.")
  
-var makeShiftWeapon ="baseball bat";
+var saveSurvivor = function(name){
+	var meleeWeapon1 = "baseball bat";
+	var meleeWeapon2 = "crowbar";
+	if (name === "Sam") {weapon = " grabs " + meleeWeapon1 + " it breaks but doesn't stop the zombie from coming after her.";}
+	else {weapon = " grabs the " +meleeWeapon2 + " and smashes the zombie until it stops moving.";}
+	weapon = name + weapon;
+	return weapon;
+	
+};
+
+var $saveSurvivor=saveSurvivor("Jake")
+console.log($saveSurvivor);
+
+
