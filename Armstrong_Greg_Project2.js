@@ -38,3 +38,16 @@ if ((notBitten && notSick) || bitten) {infection = "are not infected";}
 
 var fullCheck = checkingForBites("Mike, Sam, Jake ");
 console.log(fullCheck);
+
+console.log ("While our guard was down we didn't notice the zombies surrounding us.")
+
+
+var ammo = 10;
+var zombies = 11;
+	console.log ("I only have " + ammo + " rounds of ammo left and there are " + zombies + " zombies and none of the others have any ammo")
+while (ammo > 0, zombies > 0) {
+	console.log ("There are " + zombies + " zombies left and only " + ammo + " rounds left!")
+	ammo--, zombies--;
+};
+ 
+var makeShiftWeapon ="baseball bat";
