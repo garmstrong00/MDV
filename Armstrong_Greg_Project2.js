@@ -23,3 +23,18 @@ var watchForZombie =  function(name) {
 };
 
 watchForZombie("zombies");
+
+console.log ("Hey " + survivors[2] + " it looks like a group of other survivors is heading our way!");
+console.log ("They're from the next town over, we need to check " + survivors[0] + ", " + survivors[1] + ", and " + survivors[3] + " for any bites or else we are all dead!");
+
+var checkingForBites = function(name) {
+	var notBitten=true, notSick=true, bitten=false;
+
+if ((notBitten && notSick) || bitten) {infection = "are not infected";} 
+	else {infection = "are all bitten he is infected!"}
+	infection = name + infection;
+	return infection;
+};
+
+var fullCheck = checkingForBites("Mike, Sam, Jake ");
+console.log(fullCheck);
