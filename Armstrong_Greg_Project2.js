@@ -5,7 +5,7 @@
 
 var myName = "Greg";
 var daysSinceOutbreak = 30;
-var survivors = ["Mike", "Sam", "Lisa", "Jake"];
+var survivors = ["Mike", "Sam", "Lisa", "Jake", "Greg"];
 
 console.log ("My name is " + myName +".");
 console.log ("It has been " + daysSinceOutbreak + " days since the dead started walking");
@@ -66,3 +66,7 @@ var $saveSurvivor=saveSurvivor("Jake")
 console.log($saveSurvivor);
 
 
+for (amountOfFood = 5; amountOfFood > 0; amountOfFood=-5) {
+	console.log(amountOfFood + " Cans of food left")
+	};
+console.log("We have no food left to feed " + survivors + ".");
