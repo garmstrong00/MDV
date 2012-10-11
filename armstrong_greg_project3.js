@@ -65,7 +65,21 @@ var leader = {
 				leader.announce("It's " + survivorsStatus + ".  We don't have more survivors today.");
 			};
 		},
-
+		// method: procedure
+		countSurvivors: function(survivorsStatus, survivorsNumber) {
+			if (survivorsStatus === true) {
+				leader.announce("Let's get started! We have ");
+				for (var n=0; n <= survivorsNumber.length; n++){
+					var survivorsToFeed = n;
+					leader.announce(survivorToFeed);
+				}
+				leader.announce(" survivors to feed today.");
+				return survivorStatus;
+			} else {
+					leader.announce("We have no new survivors today, Less mouths to feed for now. ");
+			};
+		},
+		
 
 
 
