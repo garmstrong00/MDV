@@ -46,7 +46,7 @@ var leader = "Greg",
 		anySurvivorsToday = false;
 
 
-//object
+
 var leader = {
 		realName:	"Greg",
 		position:	"Leader of the group",
@@ -65,7 +65,7 @@ var leader = {
 				leader.announce("It's " + survivorsStatus + ".  We don't have more survivors today.");
 			};
 		},
-		// method: procedure
+		
 		countSurvivors: function(survivorsStatus, survivorsNumber) {
 			if (survivorsStatus === true) {
 				leader.announce("Let's get started! We have ");
@@ -79,6 +79,41 @@ var leader = {
 					leader.announce("We have no new survivors today, Less mouths to feed for now. ");
 			};
 		},
+		getRealName: function(name){
+			var realName = name;
+			return realName;
+		},
+		
+		getData: function(json) {
+			var i = 0;
+			while (i<json.survivors.length){
+				var survivors = json.survivors[i];
+				leader.announce("Age: " + survivors.age + ", Name: " + survivors.name + ", Job: " + survivors.job + ", Favorite Food: " + survivors.favoritefood);
+				i++;
+			};
+			return json;
+		},
+		getSurvivors: function() {
+			for (var n=0; n < receivedjson["survivors"].length; n++) {
+				var name = receivedjson["survivors"][n].name;
+				leader.announce("Hey " + name + "! time to eat before we move out!");
+			}
+		},
+		
+		feedSurvivors: function(name){
+			var survivorsDish = [];
+			var prepareFood = function(item) {
+				if (item == favoritefood) {
+					survivorsBowl.push(item);
+					leader.announce(survivorsBowl);
+				} else {
+					leader.announce("This isn't the right food!");
+				}
+			}
+			var preparedFood = "Time to add " + "Meat" + " to the menu for " + name + ".";
+			leader.announce(preparedFood);
+		},
+		
 		
 
 
