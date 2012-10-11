@@ -114,7 +114,37 @@ var leader = {
 			leader.announce(preparedFood);
 		},
 		
-		
+		cleanMess: function(mess){
+			leader.announce("ARGH, I have to clean the van because " + mess);
+			var mess = mess.length;
+			for (var messCleaned = 0; messCleaned < mess; messCleaned +=10) {
+				leader.announce(messCleaned + "% Lisa's mess cleaned up.");
+				if (mess > messCleaned) {
+					var messLeft = mess - messCleaned;
+					leader.announce(messLeft + " more minuets to go.");
+				};
+			}
+			leader.announce("I'm done, Time for me to take watch, we leave in the morning!");
+
+		}
+	},
+	survivors = {
+		makeAMess: function(survivors,food) {
+			var survivorsMess = survivors + " got " + food + " all over the floor.";
+			console.log(survivorsMess);
+			return survivorsMess;
+		}
+	};
+leader.announce("I am here to " + leader.jobs[0] + "!  I am the " + leader.position + ".");
+leader.checkSurvivors(anySurvivorsToday);
+leader.announce("Here's who we have with us now.");
+leader.getData(jsonData);
+var myName = leader.getRealName(leader.realName);
+leader.announce("I hope we find some other survivors before we move out! or else people will be looking for " + myName + " here  still!");
+leader.getSurvivors();
+leader.feedSurvivors("Max", "Lisa"); 
+var mess = survivors.makeAMess("Lisa", "Zombie Guts"); 
+leader.cleanMess(mess); 
 
 
 
