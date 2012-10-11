@@ -33,3 +33,39 @@ var jsonData = {
 		}
 	]
 };
+
+var jsonstring = JSON.stringify(jsonData);
+
+
+var receivedjson = JSON.parse(jsonstring);
+
+
+
+var leader = "Greg",
+		survivorsNumber = receivedjson["survivors"];
+		anySurvivorsToday = false;
+
+
+//object
+var leader = {
+		realName:	"Greg",
+		position:	"Leader of the group",
+		jobs:		["Help other Survivors", "Find Safety"],
+		announce: 	function(message) {
+			var quotes = "\"";
+			announcement = quotes + message + quotes;
+			console.log(announcement);
+		},
+		checkSurvivors: function(anySurvivorsToday) {
+			var survivorsStatus = anySurvivorsToday;
+			if (survivorsStatus === true) {
+				leader.announce("It's " + survivorsStatus + ".  We have more survivors today, our group is getting big.");
+				leader.countSurvivors(survivorsStatus, survivorsNumber);
+			} else {
+				leader.announce("It's " + survivorsStatus + ".  We don't have more survivors today.");
+			};
+		},
+
+
+
+
