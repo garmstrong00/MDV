@@ -45,6 +45,19 @@ function fixCase(fixThis) {
     console.log(fixThis.toProperCase());
 }
 
+function checkUrl(testThisUrl) {
+    var url = testThisUrl
+    var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+    var isUrl = re.test(url);
+    console.log("This is a " + isUrl + " url.");
+    if (url.charAt(4) == "s") {
+        console.log("This is a https url");
+    }
+    if (url.charAt(4) == ":") {
+        console.log("This is a http url");
+    }
+}
+
 
 
 
@@ -79,3 +92,4 @@ checkValidEmail("g.armstrong00@gmail.com");
 checkPhoneNum("800-223-9087");
 getSmallestNum();
 fixCase("jon jones");
+checkUrl("http://www.phandroid.com");
