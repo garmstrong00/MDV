@@ -56,9 +56,15 @@ function checkUrl(testThisUrl) {
     if (url.charAt(4) == ":") {
         console.log("This is a http url");
     }
+    else console.log("This is not a valid URL");
 }
 
-
+function getDays(testDate) {
+    var lastDayOfHockey = testDate;
+    today = new Date(2012, 10, 18);
+    var one_day = 1000 * 60 * 60 * 24;
+    console.log(Math.ceil((today.getTime() - lastDayOfHockey.getTime()) / (one_day)) + " days have gone by without hockey since " + testDate)
+}
 
 
 
@@ -93,3 +99,4 @@ checkPhoneNum("800-223-9087");
 getSmallestNum();
 fixCase("jon jones");
 checkUrl("http://www.phandroid.com");
+getDays(new Date(2012,6,11));
