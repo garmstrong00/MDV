@@ -20,6 +20,20 @@ var checkPhoneNum = function (testNumber) {
 }            
             
 
+function getSmallestNum() {
+    function isBigEnough(element, index, array) {
+        return (element >= 14);
+    }
+    var filtered = [756, 2, 9, 59, 48, 10, 4, 799, 1000].filter(isBigEnough);
+    isBigEnough();
+    filtered.sort(function (a, b) {
+        return a - b;
+    });
+    return console.log(filtered.shift());
+    
+}
+    
+
 
 
 
@@ -53,3 +67,4 @@ var checkPhoneNum = function (testNumber) {
 
 checkValidEmail("g.armstrong00@gmail.com");
 checkPhoneNum("800-223-9087");
+getSmallestNum();
