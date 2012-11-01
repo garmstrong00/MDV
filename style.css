@@ -1,0 +1,43 @@
+html {	
+	 	font-family: "Arial", Arial, "Times New Roman", serif;
+		color: Black;
+}
+
+h1 {
+	color: black;
+	margin: 0px;	
+	background: Red;
+	border: 1px solid black;
+	padding: 0px;
+	width: 100%;
+}
+
+fieldset {
+	margin: 0px;
+}
+
+label {
+	display: inline;
+	text-decoration: none;
+	text-align: left;
+}
+
+a {
+	margin: 5px;
+	padding: 5px;
+	font-size: x-small;
+}
+
+li {
+	color: Red;
+	text-align: left;
+}
+
+legend {
+	font-weight: bold;
+
+}
+
+option {
+	font-style: italic;	
+}
