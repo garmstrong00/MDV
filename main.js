@@ -1,4 +1,4 @@
-// Project 2
+// Project 3
 // Visual Frameworks
 // Greg Armstrong
 
@@ -13,11 +13,11 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	//create select field element
 	function makeCats(){
-		var fromTag = document.getElementsByTagName("form"),
-			selectLi = $('select'),
+		var formTag = document.getElementsByTagName("form");
+			selectLi = $('select');
 			makeSelect = document.createElement('select');
-			makeSelect.setAttribute("id", "systems");
-		for(var i=0, j=gameSystems.length; i<j; i++){
+			makeSelect.setAttribute("id", "select");
+		for(i=0, j=gameSystems.length; i<j; i++){
 			var makeOption = document.createElement('option');
 			var optText = gameSystems[i];
 			makeOption.setAttribute("value", optText);
@@ -57,17 +57,22 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	};
 	
-	function storeData(){
-		var id 				= Math.floor(Math.random()*10000001);
+	function storeData(key){
+		if(!key){
+			var id 				= Math.floor(Math.random()*10000001);
+		}else{
+			id = key;
+		}
+		
 		// Gather all form field values and store in object
 		getCheckBoxValue();
 		var item			= {};
-			item.title  	= ["Title", $('title').value];
-			item.systems  	= ["System", $('select').value];
-			item.date		= ["Release Date", $('releaseDate').value];
-			item.rating 	= ["Rating", $('rating').value];
-			item.bonus  	= ["Has Pre-Order Bonus?", bonusValue];
-			item.comments 	= ["Pre-Order Bonuses", $('comments').value];
+			item.title  	= ["Title:", $('title').value];
+			item.select  	= ["System:", $('select').value];
+			item.date		= ["Release Date:", $('releaseDate').value];
+			item.rating 	= ["Rating:", $('rating').value];
+			item.bonus  	= ["Has Pre-Order Bonus?:", bonusValue];
+			item.comments 	= ["Pre-Order Bonuses:", $('comments').value];
 		//Save data into local storage
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Pre-Order Saved!");
@@ -84,6 +89,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		$('items').style.display = "block";
 		for(var i=0, len=localStorage.length; i<len;i++){
 			var makeli = document.createElement('li');
+			var linksli = document.createElement('li');
 			makeList.appendChild(makeli);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
@@ -96,9 +102,66 @@ window.addEventListener("DOMContentLoaded", function(){
 				makeSubList.appendChild(makeSubli);
 				var optSubText = obj[n][0]+" "+obj[n][1];
 				makeSubli.innerHTML = optSubText;
+				makeSubList.appendChild(linksli);
 			}
+			makeItemLinks(localStorage.key(i), linksli);
 		}	
 	
+	}
+	//create edit and delete links
+	function makeItemLinks(key, linksli){
+		var editLink = document.createElement('a');
+		editLink.href = "#";
+		editLink.key = key;
+		var editText = "Edit Game";
+		editLink.addEventListener('click', editItem);
+		editLink.innerHTML = editText
+		linksli.appendChild(editLink);
+		
+		var breakTag = document.createElement('br');
+		linksli.appendChild(breakTag);
+				
+		var deleteLink = document.createElement('a');
+		deleteLink.href = "#";
+		deleteLink.key = key;
+		var deleteText = "Delete Game";
+		deleteLink.addEventListener('click', deleteItem);
+		deleteLink.innerHTML = deleteText;
+		linksli.appendChild(deleteLink);
+	
+	}
+	
+	function editItem(){
+		var value = localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		
+		toggleControls("off");
+		
+		$('title').value = item.title[1];	
+		$('select').value = item.select[1];
+		$('releaseDate').value = item.date[1];
+		$('rating').value = item.rating[1];
+		if(item.bonus[1] == "Yes"){
+			$('fav').setAttribute("checked", "checked");
+		}
+		$('comments').value = item.comments[1];
+		
+		//remove initial listener from save contact button
+		save.removeEventListener("click", storeData);
+		$('submit').value = "Edit Game";
+		var editSubmit = $('submit');
+		editSubmit.addEventListener("click", validate);
+		editSubmit.key = this.key;		
+	}
+	
+	function deleteItem(){
+		var ask = confirm("Are you sure you want to delete this listing?")
+		if(ask){
+			localStorage.removeItem(this.key);
+			window.location.reload();
+		}else{
+			alert("Item was not deleted")
+		}
 	}
 	
 	function clearLocal(){
@@ -112,10 +175,46 @@ window.addEventListener("DOMContentLoaded", function(){
 		}
 	}
 	
+	function validate(e){
+		//define elements to check
+		var getTitle = $('title')
+		var getSystem = $('select')
+		
+		//reset error message
+		errMsg.innerHTML = "";
+			getTitle.style.border = "1px solid black";
+			getSystem.style.border = "none";
+		
+		var messageAry = [];
+		//Title Validation
+		if(getTitle.value ===  ""){
+			var titleError = "Please Enter A Title";
+			getTitle.style.border = "1px solid red";
+			messageAry.push(titleError)
+		}
+		//System validation
+		if(getSystem.value=="--Choose A System--"){
+			var systemError = "Please Choose A System";
+			getSystem.style.border = "1px solid red";
+			messageAry.push(systemError)
+		}
+	if(messageAry.length >= 1){
+		for(var i=0, j=messageAry.length; i < j; i++){
+			var txt = document.createElement('li');
+			txt.innerHTML = messageAry[i];
+			errMsg.appendChild(txt);
+		}
+		e.preventDefault();
+		return false;
+	}else{
 	
+		storeData(this.key);
+		}	
+	}
 	//variable defaults
 	var gameSystems = ["--Choose A System--", "Xbox360", "Playstation 3", "WiiU", "Nintendo 3DS"],
-		bonusValue = "no"
+		bonusValue = "no",
+		errMsg = $('errors');
 	;
 	makeCats();	 
 	
@@ -127,7 +226,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	var clearLink = $('clear');
 	clearLink.addEventListener("click", clearLocal);
 	var save = $('submit');
-	save.addEventListener("click", storeData);
+	save.addEventListener("click", validate);
 
 
 
