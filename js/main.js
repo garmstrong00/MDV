@@ -1,4 +1,4 @@
-// Project 3
+// Project 4
 // Visual Frameworks
 // Greg Armstrong
 
@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		var formTag = document.getElementsByTagName("form");
 			selectLi = $('select');
 			makeSelect = document.createElement('select');
-			makeSelect.setAttribute("id", "select");
+			makeSelect.setAttribute("id", "systems");
 		for(i=0, j=gameSystems.length; i<j; i++){
 			var makeOption = document.createElement('option');
 			var optText = gameSystems[i];
@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		getCheckBoxValue();
 		var item			= {};
 			item.title  	= ["Title:", $('title').value];
-			item.select  	= ["System:", $('select').value];
+			item.systems 	= ["System:", $('systems').value];
 			item.date		= ["Release Date:", $('releaseDate').value];
 			item.rating 	= ["Rating:", $('rating').value];
 			item.bonus  	= ["Has Pre-Order Bonus?:", bonusValue];
@@ -80,6 +80,11 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	function getData(){
 		toggleControls("on")
+		if(localStorage.length === 0){
+			alert("There is no data in Local Storage so default data was added.")
+			autoFillData();
+		
+		}
 		//Write Data from local storage to browser.
 		var makeDiv = document.createElement('div');
 		makeDiv.setAttribute("id", "items");
@@ -97,6 +102,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			var obj = JSON.parse(value);
 			var makeSubList = document.createElement('ul');
 			makeli.appendChild(makeSubList);
+			getImage(obj.systems[1], makeSubList);
 			for(var n in obj){
 				var makeSubli = document.createElement('li');
 				makeSubList.appendChild(makeSubli);
@@ -108,6 +114,15 @@ window.addEventListener("DOMContentLoaded", function(){
 		}	
 	
 	}
+	//Get image function
+	function getImage(catName, makeSubList){
+		var imageLi = document.createElement('li');
+		makeSubList.appendChild(imageLi);
+		var newImg = document.createElement('img');
+		var setSrc = newImg.setAttribute("src", "images/"+ catName +".jpg");
+		imageLi.appendChild(newImg);
+	}
+	
 	//create edit and delete links
 	function makeItemLinks(key, linksli){
 		var editLink = document.createElement('a');
@@ -138,11 +153,11 @@ window.addEventListener("DOMContentLoaded", function(){
 		toggleControls("off");
 		
 		$('title').value = item.title[1];	
-		$('select').value = item.select[1];
+		$('systems').value = item.systems[1];
 		$('releaseDate').value = item.date[1];
 		$('rating').value = item.rating[1];
-		if(item.bonus[1] == "Yes"){
-			$('fav').setAttribute("checked", "checked");
+		if(item.bonus[1] == "yes"){
+			$('bonus').setAttribute("checked", "checked");
 		}
 		$('comments').value = item.comments[1];
 		
@@ -212,11 +227,20 @@ window.addEventListener("DOMContentLoaded", function(){
 		}	
 	}
 	//variable defaults
-	var gameSystems = ["--Choose A System--", "Xbox360", "Playstation 3", "WiiU", "Nintendo 3DS"],
+	var gameSystems = ["--Choose A System--", "Xbox360", "Playstation3", "WiiU", "Nintendo3DS"],
 		bonusValue = "no",
 		errMsg = $('errors');
 	;
-	makeCats();	 
+	makeCats();	
+	
+	function autoFillData(){
+		for(var n in json){
+			var id = Math.floor(Math.random()*10000001);
+			localStorage.setItem(id, JSON.stringify(json[n]));
+		
+		
+		}
+	}
 	
 
 	//Set Link & Submit Click Events

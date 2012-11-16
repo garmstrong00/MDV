@@ -1,6 +1,6 @@
 html {	
 	 	font-family: "Arial", Arial, "Times New Roman", serif;
-		color: Black;
+		color: Black, background: Black;
 }
 
 h1 {
@@ -9,8 +9,14 @@ h1 {
 	background: Red;
 	border: 1px solid black;
 	padding: 0px;
-	width: 100%;
+	width: 40%;
 }
+form {
+	background: #D8D8D8;
+	border: 1px solid black;
+	width: 40%;
+}
+
 
 fieldset {
 	margin: 0px;
@@ -26,6 +32,7 @@ a {
 	margin: 5px;
 	padding: 5px;
 	font-size: x-small;
+	color: red;
 }
 
 li {
@@ -35,9 +42,18 @@ li {
 
 legend {
 	font-weight: bold;
+	color: Red;
 
 }
 
 option {
 	font-style: italic;	
+}
+
+span {
+	color: Red;
+}
+
+p1 {
+	color: red;
 }
